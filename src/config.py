@@ -4,6 +4,8 @@ OLLAMA_URL = "http://localhost:11434"
 
 DEBUG = False
 
+MOTHOD = "paragraph"
+
 CHUNK_SIZE = 200
 
 OVERLAP = 50

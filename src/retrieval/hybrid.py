@@ -44,7 +44,8 @@ def hybrid_retrieve(query, retrieve_fn, bm25, docs, k=5, alpha=0.7):
         else:
             merged[cid]["bm25_raw_score"] = r["bm25_raw_score"]
             merged[cid]["bm25_score"] = r["score"]
-            merged[cid]["retriever"] = "hybrid"
+            if (merged[cid]["faiss_score"]>0 and r["bm25_score"]>0):
+                merged[cid]["retriever"] = "hybrid"
     for cid in merged:
         merged[cid]["score"] = (alpha * merged[cid]["faiss_score"] + (1-alpha) * merged[cid]["bm25_score"])
     results = sorted(
