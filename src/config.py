@@ -6,7 +6,7 @@ DEBUG = False
 
 MOTHOD = "paragraph"
 
-CHUNK_SIZE = 200
+CHUNK_SIZE = 500
 
 OVERLAP = 50
 

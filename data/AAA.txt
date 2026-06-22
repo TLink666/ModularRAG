@@ -4,7 +4,7 @@ Short paragraph for boundary testing and retrieval.
 
 Another brief block intended to remain isolated.
 
-Document processing experiments sometimes reveal unexpected behaviors when chunking methods interact with paragraph structure. Certain approaches preserve semantic continuity while others prioritize fixed token windows. Neither strategy is universally superior because retrieval quality depends on document style and downstream objectives. Testing with irregular paragraph.
+Document processing experiments sometimes reveal unexpected behaviors when chunking methods interact with paragraph structure. Certain approaches preserve semantic continuity while others prioritize fixed token windows. Neither strategy is universally superior because retrieval quality depends on document style and downstream objectives. Testing with irregular paragraph sizes can expose hidden assumptions inside preprocessing pipelines and indexing implementations.
 
 Tiny paragraph used for separation and testing.
 
