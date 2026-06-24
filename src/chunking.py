@@ -66,12 +66,8 @@ def paragraph_chunk(text, chunk_size=500, overlap=50):
 
                 # 最后一段
                 if end >= len(p):
-                    tail = p[start:]
                     # 不直接输出
-                    current = (
-                        p[max(0, start-overlap):start]
-                        + tail
-                    )
+                    current = p[start:]
                     break
                 chunk = p[start:end]
                 chunks.append({

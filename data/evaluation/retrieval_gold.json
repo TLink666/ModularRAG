@@ -1,0 +1,34 @@
+[
+{
+"query": "What do users prefer in AI systems?",
+"source": "future_of_ai_tools.pdf"
+},
+{
+"query": "What transformed computers into household devices?",
+"source": "tech_history.txt"
+},
+{
+"query": "Which brewing method uses pressure to produce concentrated flavor?",
+"source": "coffee.txt"
+},
+{
+"query": "What challenges remain for long-duration human space missions?",
+"source": "space_exploration.txt"
+},
+{
+"query": "Why do cities invest in public transportation systems?",
+"source": "urban_transport.txt"
+},
+{
+"query": "What is a gameplay loop in game design?",
+"source": "game_design.txt"
+},
+{
+"query": "What does chunk overlap help preserve between neighboring segments?",
+"source": "chunk_test.txt"
+},
+{
+"query": "What is cosine similarity?",
+"source": "sample.txt"
+}
+]
