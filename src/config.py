@@ -36,6 +36,8 @@ HYBRID_ALPHA = 0.7
 
 DEBUG = False
 
+BUILD_INDEX = False
+
 
 
 def print_config():

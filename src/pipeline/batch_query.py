@@ -1,10 +1,11 @@
 from src.rag.generate import ask_llm
 from src.rag.prompt import build_context
+from src.retrieval.hybrid import hybrid_retrieve
 
-def batch_query(queries, retrieve_fn):
+def batch_query(queries, model, index, bm25, docs):
     results=[]
     for query in queries:
-        retrieved = retrieve_fn(query)
+        retrieved = hybrid_retrieve(query, model, index, bm25, docs)
         context = build_context(retrieved)
         answer = ask_llm(context, query)
         results.append({

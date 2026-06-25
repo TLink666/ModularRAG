@@ -1,4 +1,6 @@
 from src.retrieval.bm25_store import *
+from src.retrieval.faiss_retrieve import retrieve
+from src.config import TOP_K, HYBRID_ALPHA
 
 def normalize_scores(results):
     scores = [r["score"] for r in results]
@@ -12,9 +14,9 @@ def normalize_scores(results):
         r["score"] = (r["score"]-mn) / (mx-mn)
     return results
 
-def hybrid_retrieve(query, retrieve_fn, bm25, docs, k=5, alpha=0.7):
-    faiss_results = retrieve_fn(query, k=k)
-    bm25_results = search_bm25(bm25, docs, query, k=k)
+def hybrid_retrieve(query, model, index, bm25, docs, k=TOP_K, alpha=HYBRID_ALPHA):
+    faiss_results = retrieve(query, model, index, docs, k)
+    bm25_results = search_bm25(bm25, docs, query, k)
     for r in faiss_results:
         r["faiss_raw_score"] = r["score"]
     faiss_results = normalize_scores(faiss_results)
