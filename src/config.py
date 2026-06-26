@@ -42,6 +42,8 @@ DEBUG = False
 
 BUILD_INDEX = False
 
+MAX_CONTEXT_CHARS = 3000
+
 
 
 def print_config():
@@ -73,5 +75,6 @@ def export_config():
         "overlap":OVERLAP,
         "method":CHUNK_METHOD,
         "top_k":TOP_K,
-        "alpha":HYBRID_ALPHA
+        "alpha":HYBRID_ALPHA,
+        "max_context_chars":MAX_CONTEXT_CHARS
     }

@@ -1,6 +1,3 @@
-def build_context(retrieved):
-    return "\n".join(r["text"] for r in retrieved)
-
 def build_prompt(context, question):
     return f"""
 You are a retrieval-based assistant.

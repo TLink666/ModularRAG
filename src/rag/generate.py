@@ -1,8 +1,10 @@
 import requests
 from src.rag.prompt import build_prompt
 from src.config import *
+from src.rag.context import build_context
 
-def ask_llm(context, question):
+def ask_llm(retrieved, question):
+    context = build_context(retrieved)
     prompt = build_prompt(context, question)
     res = requests.post(
         f"{OLLAMA_URL}/api/generate",

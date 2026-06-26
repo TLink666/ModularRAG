@@ -1,0 +1,7 @@
+{
+  "chunk_size": 500,
+  "overlap": 50,
+  "method": "paragraph",
+  "top_k": 5,
+  "alpha": 0.7
+}
