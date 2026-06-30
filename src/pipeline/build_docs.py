@@ -1,18 +1,12 @@
-from src.chunking import chunk_text
+from src.chunking.chunk import chunk_text
 
-def build_docs(loaded_docs, method, chunk_size=200, overlap=50):
+def build_docs(loaded_docs):
 
     docs = []
     chunk_id = 0
 
     for file in loaded_docs:
-        chunks = chunk_text(
-            text=file["text"],
-            method=method,
-            chunk_size=chunk_size,
-            overlap=overlap
-        )
-
+        chunks = chunk_text(text=file["text"])
         for chunk in chunks:
             if isinstance(chunk, str):
                 text = chunk

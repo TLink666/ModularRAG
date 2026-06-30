@@ -6,10 +6,7 @@ from src.rag.guard import retrieval_guard
 
 def ask_llm(retrieved, question):
     if ENABLE_GUARD:
-        if not retrieval_guard(
-                retrieved,
-                RETRIEVAL_THRESHOLD
-            ):
+        if not retrieval_guard(retrieved):
             return "I don't have enough information in the retrieved documents."
     context = build_context(retrieved)
     prompt = build_prompt(context, question)

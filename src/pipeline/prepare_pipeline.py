@@ -12,7 +12,7 @@ def prepare_pipeline():
     
     if BUILD_INDEX:
         loaded_docs = load_documents(DATA_DIR)
-        docs = build_docs(loaded_docs, CHUNK_METHOD, CHUNK_SIZE, OVERLAP)
+        docs = build_docs(loaded_docs)
         index = build_index(model, docs)
         save_index(index, docs, STORAGE_DIR)
     else:

@@ -24,7 +24,7 @@ EMBED_MODEL = "all-MiniLM-L6-v2"
 
 # ========= Chunk =========
 
-CHUNK_METHOD = "paragraph"
+CHUNK_METHOD = "recursive"
 
 CHUNK_SIZE = 500
 
@@ -42,13 +42,13 @@ RRF_K = 5
 
 ENABLE_GUARD=True
 
-RETRIEVAL_THRESHOLD=0.25
+RETRIEVAL_THRESHOLD=0.5
 
 # ========= Experiment =========
 
 DEBUG = False
 
-BUILD_INDEX = False
+BUILD_INDEX = True
 
 MAX_CONTEXT_CHARS = 3000
 

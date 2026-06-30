@@ -1,22 +1,5 @@
 import re
 
-def chunk_text(text, method="paragraph", chunk_size=200, overlap=50):
-    if method == "naive":
-        return naive_chunk(text, chunk_size, overlap)
-    if method == "paragraph":
-        return paragraph_chunk(text, chunk_size, overlap)
-    raise ValueError()
-
-def naive_chunk(text, chunk_size=200, overlap=50):
-    chunks = []
-    start = 0
-    while start < len(text):
-        end = start + chunk_size
-        chunk = text[start:end]
-        chunks.append(chunk)
-        start = end - overlap  # overlap避免语义断裂
-    return chunks
-
 def split_paragraphs(text: str):
     # 1. normalize
     text = re.sub(r'\n\s*\n+', '\n\n', text)
