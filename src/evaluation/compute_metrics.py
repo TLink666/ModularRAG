@@ -1,6 +1,6 @@
 from src.evaluation.retrieval_metrics import recall_at_k, mrr
 
-def compute_metrics(results, gold, chunk_stats):
+def compute_metrics(results, gold, chunk_stats, errors):
     total = 0
 
     for item in results:
@@ -12,6 +12,7 @@ def compute_metrics(results, gold, chunk_stats):
             "recall@1": recall_at_k(results, gold, k=1),
             "recall@5": recall_at_k(results, gold, k=5),
             "mrr": mrr(results, gold),
+            "top1_failures": len(errors),
             "evaluated_queries": total
         },
         "chunk":{
