@@ -1,0 +1,13 @@
+{
+  "retrieval": {
+    "recall@1": 0.5,
+    "recall@5": 0.7,
+    "mrr": 0.5833333333333334,
+    "top1_failures": 5,
+    "evaluated_queries": 10
+  },
+  "chunk": {
+    "num_chunks": 47,
+    "avg_length": 378.7
+  }
+}

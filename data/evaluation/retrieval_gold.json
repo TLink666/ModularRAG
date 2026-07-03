@@ -1,38 +1,52 @@
 [
 {
-"query": "What do users prefer in AI systems?",
-"source": "future_of_ai_tools.pdf"
+  "query": "What are the main challenges of implementing memory in AI systems, and how do retrieval mechanisms address these challenges?",
+  "source": "the_role_of_memory_in_modern_ai_systems.md",
+  "anchor": "Designing effective retrieval mechanisms becomes essential. These mechanisms decide what to store, what to forget, and what to retrieve at any given time."
 },
 {
-"query": "What transformed computers into household devices?",
-"source": "tech_history.txt"
+  "query": "What enabled computers to move from room-sized machines to home and school devices?",
+  "source": "tech_history.txt",
+  "anchor": "Smaller and cheaper hardware allowed computers to move into homes and schools."
 },
 {
-"query": "Which brewing method uses pressure to produce concentrated flavor?",
-"source": "coffee.txt"
+  "query": "Which brewing method uses pressure to produce concentrated flavor and serves as the base for drinks such as cappuccino and latte?",
+  "source": "coffee.txt",
+  "anchor": "Espresso uses pressure to produce concentrated flavor and serves as the base for drinks such as cappuccino and latte."
 },
 {
-"query": "What challenges remain for long-duration human space missions?",
-"source": "space_exploration.txt"
+  "query": "What has helped reduce the cost and increase the frequency of space launches in modern space exploration?",
+  "source": "space_exploration.txt",
+  "anchor": "Reusable launch systems have reduced costs and increased launch frequency."
 },
 {
-"query": "Why do cities invest in public transportation systems?",
-"source": "urban_transport.txt"
+  "query": "What are some recent developments in urban transportation systems?",
+  "source": "urban_transport.txt",
+  "anchor": "Recent developments include ride-sharing platforms, electric vehicles, and experiments with autonomous transport."
 },
 {
-"query": "What is a gameplay loop in game design?",
-"source": "game_design.txt"
+  "query": "What is the gameplay loop in game design?",
+  "source": "game_design.txt",
+  "anchor": "One important concept in game design is the gameplay loop. This refers to the repeated actions that players perform during normal play."
 },
 {
-"query": "What does chunk overlap help preserve between neighboring segments?",
-"source": "chunk_test.txt"
+  "query": "Why is this type of lorem ipsum style text used in retrieval system testing?",
+  "source": "chunk.txt",
+  "anchor": "Lorem ipsum style text is commonly used when testing document pipelines and retrieval systems because meaning is less important than structure and length."
 },
 {
-"query": "What is cosine similarity?",
-"source": "sample.txt"
+  "query": "What does cosine similarity focus on in vector embeddings?",
+  "source": "sample.txt",
+  "anchor": "Cosine similarity focuses on vector direction rather than magnitude."
 },
 {
-"query": "What are the main challenges of implementing memory in AI systems, and how do retrieval mechanisms address these challenges?",
-"source": "The_Role_of_Memory_in_Modern_AI_Systems.md"
+  "query": "Why is data quality often more important than model complexity in machine learning systems?",
+  "source": "Machine_Learning_Overview.docx",
+  "anchor": "In practical systems, data quality often matters more than model complexity."
+},
+{
+  "query": "What do users prefer in AI systems?",
+  "source": "future_of_ai_tools.pdf",
+  "anchor": "• respond quickly, \n• explain results clearly, \n• maintain predictable behavior, \n• allow correction and iteration."
 }
 ]

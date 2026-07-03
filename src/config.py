@@ -79,10 +79,25 @@ def print_config():
     
 def export_config():
     return {
-        "chunk_size":CHUNK_SIZE,
-        "overlap":OVERLAP,
-        "method":CHUNK_METHOD,
-        "top_k":TOP_K,
-        "alpha":HYBRID_ALPHA,
-        "max_context_chars":MAX_CONTEXT_CHARS
+        # Models
+        "llm_model": LLM_MODEL,
+        "embed_model": EMBED_MODEL,
+
+        # Chunk
+        "chunk_method": CHUNK_METHOD,
+        "chunk_size": CHUNK_SIZE,
+        "overlap": OVERLAP,
+
+        # Retrieval
+        "retrieval_method": RETRIEVAL_METHOD,
+        "top_k": TOP_K,
+        "hybrid_alpha": HYBRID_ALPHA,
+        "rrf_k": RRF_K,
+
+        # Generation
+        "max_context_chars": MAX_CONTEXT_CHARS,
+
+        # Guard
+        "enable_guard": ENABLE_GUARD,
+        "retrieval_threshold": RETRIEVAL_THRESHOLD,
     }

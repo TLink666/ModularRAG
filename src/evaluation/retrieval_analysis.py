@@ -1,7 +1,11 @@
+from src.evaluation.match import match_gold
+
 def analyze_retrieval_errors(results, gold):
+
     errors = []
 
     for result in results:
+
         query = result["query"]
 
         if query not in gold:
@@ -10,16 +14,16 @@ def analyze_retrieval_errors(results, gold):
         target = gold[query]
         retrieved = result["retrieved"]
 
-        gold_rank = None   # ← 放到这里
+        gold_rank = None
 
         for r in retrieved:
-            if r["source"] == target:
+            if match_gold(r, target):
                 gold_rank = r["rank"]
                 break
 
         if (
-            len(retrieved) > 0 and
-            retrieved[0]["source"] == target
+            len(retrieved) > 0
+            and match_gold(retrieved[0], target)
         ):
             continue
 

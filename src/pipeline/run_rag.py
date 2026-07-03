@@ -5,7 +5,7 @@ from src.evaluation.retrieval_debug import retrieval_debug_stats
 from src.evaluation.gold_loader import load_gold
 from src.evaluation.compute_metrics import compute_metrics
 from src.evaluation.retrieval_analysis import analyze_retrieval_errors
-from src.experiment.run_experiment import run_experiment
+from src.experiment.save_experiment import save_experiment
 from src.config import *
 
 def run_rag(queries):
@@ -32,11 +32,11 @@ def run_rag(queries):
 
     metrics = compute_metrics(results, gold, chunk_stats, errors)
     
-    run_experiment(
+    save_experiment(
         config=export_config(),
         results=results,
         metrics=metrics,
         debug_stats=debug_stats
     )
 
-    return results, metrics, docs, chunk_stats, debug_stats
+    return results, metrics, docs, chunk_stats, debug_stats, errors

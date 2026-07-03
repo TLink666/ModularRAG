@@ -1,46 +1,56 @@
 def recall_at_k(results, gold, k=5):
+
     hit = 0
     total = 0
-    
-    for item in results:
-        q = item["query"]
+
+    for r in results:
+
+        q = r["query"]
+
         if q not in gold:
             continue
-        total += 1
+
         target = gold[q]
-        retrieved = item["retrieved"][:k]
+
+        retrieved = r["retrieved"][:k]
+
         if any(
-            r["source"] == target
-            for r in retrieved
+            (
+                x["source"] == target["source"]
+                and target["anchor"] in x["text"]
+            )
+            for x in retrieved
         ):
             hit += 1
-    if total == 0:
-        return None
-    return round(hit / total, 3)
+
+        total += 1
+
+    return hit / total if total else 0
 
 def mrr(results, gold):
-    total_rr = 0
-    total = 0
 
-    for item in results:
-        q = item["query"]
+    scores = []
+
+    for r in results:
+
+        q = r["query"]
+
         if q not in gold:
             continue
-        total += 1
+
         target = gold[q]
+
         rr = 0
-        for rank, r in enumerate(
-            item["retrieved"],
-            1
-        ):
-            if r["source"] == target:
+
+        for rank, x in enumerate(r["retrieved"], 1):
+
+            if (
+                x["source"] == target["source"]
+                and target["anchor"] in x["text"]
+            ):
                 rr = 1 / rank
                 break
 
-        total_rr += rr
-    if total == 0:
-        return None
-    return round(
-        total_rr / total,
-        3
-    )
+        scores.append(rr)
+
+    return sum(scores) / len(scores) if scores else 0
