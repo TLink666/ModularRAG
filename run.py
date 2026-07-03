@@ -1,4 +1,5 @@
 from src.pipeline.run_rag import run_rag
+from src.output.cli import print_result
 
 queries = [
     "What do users prefer in AI systems?",
@@ -15,7 +16,14 @@ if __name__ == "__main__":
     print()
 
     print("Finished")
+    
+    print()
+    
+    for result in results:
+        print_result(result)
 
     print()
 
     print(metrics)
+    
+    
