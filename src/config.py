@@ -52,8 +52,6 @@ BUILD_INDEX = True
 
 MAX_CONTEXT_CHARS = 3000
 
-
-
 def print_config():
     print("\n===== CONFIG =====")
     print(
