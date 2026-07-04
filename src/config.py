@@ -22,13 +22,17 @@ LLM_MODEL = "qwen2.5:7b"
 
 EMBED_MODEL = "all-MiniLM-L6-v2"
 
+SEMANTIC_MODEL = EMBED_MODEL
+
 # ========= Chunk =========
 
-CHUNK_METHOD = "recursive"
+CHUNK_METHOD = "semantic"
 
 CHUNK_SIZE = 500
 
 OVERLAP = 50
+
+BREAK_THRESHOLD = 0.75
 
 # ========= Retrieval =========
 
