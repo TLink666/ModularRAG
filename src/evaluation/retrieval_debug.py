@@ -24,32 +24,3 @@ def retrieval_debug_stats(results):
         "top_chunks":
             Counter(chunks).most_common(5)
     }
-
-def print_retrieval(stats):
-    print("\n=== Retrieval Statistics ===")
-    print(
-        f"Queries: "
-        f"{stats['num_queries']}"
-    )
-    print(
-        f"Avg confidence: "
-        f"{stats['avg_confidence']}"
-    )
-    print(
-        f"Min confidence: "
-        f"{stats['min_confidence']}"
-    )
-    print(
-        f"Max confidence: "
-        f"{stats['max_confidence']}"
-    )
-    print(
-        f"Unique sources: "
-        f"{stats['unique_sources']}"
-    )
-    print("\nTop reused chunks:")
-    for cid, count in stats["top_chunks"]:
-        print(
-            f"Chunk {cid}: "
-            f"{count}"
-        )

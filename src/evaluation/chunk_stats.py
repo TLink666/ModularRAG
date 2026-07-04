@@ -7,7 +7,7 @@ def analyze_chunks(docs):
         for d in docs
     ]
     sources = Counter(
-        d["source"]
+        d["metadata"]["source"]
         for d in docs
     )
     tiny = [

@@ -1,3 +1,5 @@
+from src.evaluation.match import match_gold
+
 def recall_at_k(results, gold, k=5):
 
     hit = 0
@@ -15,10 +17,7 @@ def recall_at_k(results, gold, k=5):
         retrieved = r["retrieved"][:k]
 
         if any(
-            (
-                x["source"] == target["source"]
-                and target["anchor"] in x["text"]
-            )
+            match_gold(x, target)
             for x in retrieved
         ):
             hit += 1
@@ -44,10 +43,7 @@ def mrr(results, gold):
 
         for rank, x in enumerate(r["retrieved"], 1):
 
-            if (
-                x["source"] == target["source"]
-                and target["anchor"] in x["text"]
-            ):
+            if match_gold(x,target):
                 rr = 1 / rank
                 break
 

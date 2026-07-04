@@ -15,16 +15,32 @@ def normalize_scores(results):
         r["score"] = (r["score"]-mn) / (mx-mn)
     return results
 
-def hybrid_retrieve(query, model, index, bm25, docs, k=TOP_K, alpha=HYBRID_ALPHA):
+def retrieve_candidates(query, model, index, bm25, docs, k):
+
     faiss_results = retrieve(query, model, index, docs, k)
+
     bm25_results = search_bm25(bm25, docs, query, k)
+
+    return faiss_results, bm25_results
+
+def normalize_candidates(faiss_results, bm25_results):
+
     for r in faiss_results:
         r["faiss_raw_score"] = r["score"]
-    faiss_results = normalize_scores(faiss_results)
+
+    normalize_scores(faiss_results)
+
     for r in bm25_results:
         r["bm25_raw_score"] = r["score"]
-    bm25_results = normalize_scores(bm25_results)
+
+    normalize_scores(bm25_results)
+
+    return faiss_results, bm25_results
+
+def merge_candidates(faiss_results, bm25_results):
+
     merged = {}
+
     for rank, r in enumerate(faiss_results, 1):
         cid = r["chunk_id"]
         merged[cid] = {
@@ -48,15 +64,16 @@ def hybrid_retrieve(query, model, index, bm25, docs, k=TOP_K, alpha=HYBRID_ALPHA
                 "faiss_score": 0,
                 "bm25_score": r["score"]
             }
-        else:
-            merged[cid]["bm25_rank"]=rank
-            merged[cid]["bm25_raw_score"] = r["bm25_raw_score"]
-            merged[cid]["bm25_score"] = r["score"]
-            if (merged[cid]["faiss_score"]>0 and merged[cid]["bm25_score"]>0):
-                merged[cid]["retriever"] = "hybrid"
+
+    return merged
+
+def compute_fusion_scores(merged, alpha):
+
     for cid in merged:
+
         if RETRIEVAL_METHOD == "weighted":
             merged[cid]["score"] = (alpha * merged[cid]["faiss_score"] + (1-alpha) * merged[cid]["bm25_score"])
+
         elif RETRIEVAL_METHOD == "rrf":
             score = 0
             if (merged[cid]["faiss_rank"]is not None):
@@ -64,12 +81,42 @@ def hybrid_retrieve(query, model, index, bm25, docs, k=TOP_K, alpha=HYBRID_ALPHA
             if (merged[cid]["bm25_rank"]is not None):
                 score += (1 /(RRF_K+merged[cid]["bm25_rank"]))
             merged[cid]["score"]=score
+
+    return merged
+
+def finalize_results(results, k):
     results = sorted(
-        merged.values(),
-        key=lambda x:x["score"],
+        results,
+        key=lambda x: x["score"],
         reverse=True
     )[:k]
     results = calibrate_score(results)
-    for i, r in enumerate(results, 1):
-        r["rank"] = i
+    for rank, result in enumerate(results, 1):
+        result["rank"] = rank
+
     return results
+
+
+def hybrid_retrieve(query, model, index, bm25, docs, k=TOP_K, alpha=HYBRID_ALPHA):
+
+    faiss_results, bm25_results = retrieve_candidates(query, model, index, bm25, docs, k)
+
+    faiss_results, bm25_results = normalize_candidates(
+        faiss_results,
+        bm25_results
+    )
+
+    merged = merge_candidates(
+        faiss_results,
+        bm25_results
+    )
+
+    merged = compute_fusion_scores(
+        merged,
+        alpha
+    )
+
+    return finalize_results(
+        list(merged.values()),
+        k
+    )

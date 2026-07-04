@@ -17,8 +17,12 @@ def search_bm25(bm25, docs, query, k=5):
     )
     results = []
     for idx, score in ranked[:k]:
+        doc = docs[idx]
         results.append({
-            **docs[idx],
+            "chunk_id": doc["metadata"]["chunk_id"],
+            "source": doc["metadata"]["source"],
+            "page": doc["metadata"]["page"],
+            "text": doc["text"],
             "score": float(score),
             "retriever": "bm25"
         })

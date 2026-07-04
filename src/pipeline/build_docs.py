@@ -8,15 +8,16 @@ def build_docs(loaded_docs):
     for file in loaded_docs:
         chunks = chunk_text(text=file["text"])
         for chunk in chunks:
-            if isinstance(chunk, str):
-                text = chunk
-            else:
-                text = chunk["text"]
+            text = chunk if isinstance(chunk, str) else chunk["text"]
             docs.append({
-                "chunk_id": chunk_id,
-                "source": file["source"],
-                "page": file["page"],
-                "text": text
+                "text": text,
+                "metadata": {
+                    "chunk_id": chunk_id,
+                    "source": file["source"],
+                    "page": file["page"]
+                }
             })
+
             chunk_id += 1
+
     return docs
