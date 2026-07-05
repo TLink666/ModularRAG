@@ -1,24 +1,14 @@
-from sentence_transformers import SentenceTransformer
 import numpy as np
+from src.models.model_loader import load_model
 from src.chunking.paragraph import split_paragraphs
 from src.chunking.recursive import split_sentences
-from src.chunking.naive import naive_chunk
-from src.config import BREAK_THRESHOLD, SEMANTIC_MODEL
-
-_model = None
-
-def get_model():
-    global _model
-    if _model is None:
-        _model = SentenceTransformer(SEMANTIC_MODEL)
-    return _model
-
+from src.config import SEMANTIC_BREAK_THRESHOLD, SEMANTIC_MODEL
 
 def cosine(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 
-def semantic_chunk(text, chunk_size=500, overlap=0, break_threshold=BREAK_THRESHOLD):
+def semantic_chunk(text, chunk_size=500, overlap=0, break_threshold=SEMANTIC_BREAK_THRESHOLD):
     paragraphs = split_paragraphs(text)
 
     sentences = []
@@ -28,7 +18,7 @@ def semantic_chunk(text, chunk_size=500, overlap=0, break_threshold=BREAK_THRESH
     if not sentences:
         return []
 
-    model = get_model()
+    model = load_model(SEMANTIC_MODEL)
     embeddings = model.encode(sentences)
 
     chunks = []

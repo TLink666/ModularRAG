@@ -41,6 +41,7 @@ def prepare_results(results):
 
                 "score": r["score"],
                 "confidence": r["confidence"],
+                "rerank_score": r.get("rerank_score", None),
 
                 "faiss_rank": r["faiss_rank"],
                 "faiss_score": r["faiss_score"],

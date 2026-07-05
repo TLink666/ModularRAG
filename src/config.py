@@ -24,7 +24,7 @@ EMBED_MODEL = "all-MiniLM-L6-v2"
 
 SEMANTIC_MODEL = EMBED_MODEL
 
-RERANK_MODEL="..."
+RERANK_MODEL="BAAI/bge-reranker-base"
 
 # ========= Chunk =========
 
@@ -34,7 +34,7 @@ CHUNK_SIZE = 500
 
 OVERLAP = 50
 
-BREAK_THRESHOLD = 0.75
+SEMANTIC_BREAK_THRESHOLD = 0.2
 
 # ========= Retrieval =========
 
@@ -42,7 +42,7 @@ RETRIEVE_TOP_K = 20
 
 FINAL_TOP_K = 5
 
-USE_RERANKER = False
+USE_RERANKER = True
 
 HYBRID_ALPHA = 0.7
 

@@ -4,7 +4,7 @@ from src.config import *
 from src.rag.context import build_context
 from src.rag.guard import retrieval_guard
 
-def ask_llm(retrieved, question):
+def ask_llm(retrieved, question, model = LLM_MODEL):
     if ENABLE_GUARD:
         if not retrieval_guard(retrieved):
             return "I don't have enough information in the retrieved documents."
@@ -13,7 +13,7 @@ def ask_llm(retrieved, question):
     res = requests.post(
         f"{OLLAMA_URL}/api/generate",
         json={
-            "model": "qwen2.5:7b",
+            "model": model,
             "prompt": prompt,
             "stream": False
         }

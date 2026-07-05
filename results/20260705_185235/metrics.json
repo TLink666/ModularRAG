@@ -1,0 +1,75 @@
+{
+  "retrieval": {
+    "recall@1": 0.7,
+    "recall@5": 0.8,
+    "mrr": 0.75,
+    "top1_failures": 3,
+    "evaluated_queries": 10
+  },
+  "chunk": {
+    "num_chunks": 55,
+    "avg_length": 323.2
+  },
+  "per_query": {
+    "What are the main challenges of implementing memory in AI systems, and how do retrieval mechanisms address these challenges?": {
+      "hit@1": false,
+      "mrr": 0,
+      "gold_rank": null,
+      "top1_source": "future_of_ai_tools.pdf"
+    },
+    "What enabled computers to move from room-sized machines to home and school devices?": {
+      "hit@1": true,
+      "mrr": 1.0,
+      "gold_rank": 1,
+      "top1_source": "tech_history.txt"
+    },
+    "Which brewing method uses pressure to produce concentrated flavor and serves as the base for drinks such as cappuccino and latte?": {
+      "hit@1": true,
+      "mrr": 1.0,
+      "gold_rank": 1,
+      "top1_source": "coffee.txt"
+    },
+    "What has helped reduce the cost and increase the frequency of space launches in modern space exploration?": {
+      "hit@1": true,
+      "mrr": 1.0,
+      "gold_rank": 1,
+      "top1_source": "space_exploration.txt"
+    },
+    "What are some recent developments in urban transportation systems?": {
+      "hit@1": true,
+      "mrr": 1.0,
+      "gold_rank": 1,
+      "top1_source": "urban_transport.txt"
+    },
+    "What is the gameplay loop in game design?": {
+      "hit@1": true,
+      "mrr": 1.0,
+      "gold_rank": 1,
+      "top1_source": "game_design.txt"
+    },
+    "Why is this type of lorem ipsum style text used in retrieval system testing?": {
+      "hit@1": false,
+      "mrr": 0,
+      "gold_rank": null,
+      "top1_source": "chunk_test.txt"
+    },
+    "What does cosine similarity focus on in vector embeddings?": {
+      "hit@1": true,
+      "mrr": 1.0,
+      "gold_rank": 1,
+      "top1_source": "sample.txt"
+    },
+    "Why is data quality often more important than model complexity in machine learning systems?": {
+      "hit@1": true,
+      "mrr": 1.0,
+      "gold_rank": 1,
+      "top1_source": "Machine_Learning_Overview.docx"
+    },
+    "What do users prefer in AI systems?": {
+      "hit@1": false,
+      "mrr": 0.5,
+      "gold_rank": 2,
+      "top1_source": "tech_history.txt"
+    }
+  }
+}

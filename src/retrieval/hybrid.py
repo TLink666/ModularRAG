@@ -1,7 +1,8 @@
 from src.retrieval.bm25_store import *
 from src.retrieval.faiss_retrieve import retrieve
 from src.retrieval.score import calibrate_score
-from src.config import FINAL_TOP_K, HYBRID_ALPHA, RETRIEVAL_METHOD, RRF_K
+from src.models.reranker import rerank
+from src.config import FINAL_TOP_K, RETRIEVE_TOP_K, HYBRID_ALPHA, RETRIEVAL_METHOD, RRF_K, USE_RERANKER
 
 def normalize_scores(results):
     scores = [r["score"] for r in results]
@@ -15,11 +16,11 @@ def normalize_scores(results):
         r["score"] = (r["score"]-mn) / (mx-mn)
     return results
 
-def retrieve_candidates(query, model, index, bm25, docs, k):
+def retrieve_candidates(query, model, index, bm25, docs):
 
-    faiss_results = retrieve(query, model, index, docs, k)
+    faiss_results = retrieve(query, model, index, docs, RETRIEVE_TOP_K)
 
-    bm25_results = search_bm25(bm25, docs, query, k)
+    bm25_results = search_bm25(bm25, docs, query, RETRIEVE_TOP_K)
 
     return faiss_results, bm25_results
 
@@ -96,10 +97,32 @@ def finalize_results(results, k):
 
     return results
 
+def finalize_results(results, query):
 
-def hybrid_retrieve(query, model, index, bm25, docs, k=FINAL_TOP_K, alpha=HYBRID_ALPHA):
+    results = sorted(
+        results,
+        key=lambda x: x["score"],
+        reverse=True
+    )
 
-    faiss_results, bm25_results = retrieve_candidates(query, model, index, bm25, docs, k)
+    results = results[:RETRIEVE_TOP_K]
+
+    results = calibrate_score(results)
+
+    if USE_RERANKER:
+        results = rerank(query, results)
+
+    results = results[:FINAL_TOP_K]
+
+    for rank, result in enumerate(results, 1):
+        result["rank"] = rank
+
+    return results
+
+
+def hybrid_retrieve(query, model, index, bm25, docs, alpha=HYBRID_ALPHA):
+
+    faiss_results, bm25_results = retrieve_candidates(query, model, index, bm25, docs)
 
     faiss_results, bm25_results = normalize_candidates(
         faiss_results,
@@ -118,5 +141,5 @@ def hybrid_retrieve(query, model, index, bm25, docs, k=FINAL_TOP_K, alpha=HYBRID
 
     return finalize_results(
         list(merged.values()),
-        k
+        query
     )

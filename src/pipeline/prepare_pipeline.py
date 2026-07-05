@@ -1,14 +1,12 @@
-import os
-from sentence_transformers import SentenceTransformer
 from src.config import *
+from src.models.model_loader import load_model
 from src.loaders.document_loader import load_documents
 from src.pipeline.build_docs import build_docs
 from src.vector_store.faiss_store import *
 from src.retrieval.bm25_store import build_bm25
 
 def prepare_pipeline():
-    os.environ["HF_HOME"] = HF_CACHE
-    model = SentenceTransformer(EMBED_MODEL)
+    model = load_model(EMBED_MODEL)
     
     if BUILD_INDEX:
         loaded_docs = load_documents(DATA_DIR)
