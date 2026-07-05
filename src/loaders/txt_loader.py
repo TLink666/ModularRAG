@@ -6,7 +6,6 @@ def load_txt(path):
             {
                 "source":
                     os.path.basename(path),
-                "page": None,
                 "text": f.read()
             }
 

@@ -22,6 +22,7 @@ def search_bm25(bm25, docs, query, k=5):
             "chunk_id": doc["metadata"]["chunk_id"],
             "source": doc["metadata"]["source"],
             "page": doc["metadata"]["page"],
+            "num_images": doc["metadata"]["num_images"],
             "text": doc["text"],
             "score": float(score),
             "retriever": "bm25"

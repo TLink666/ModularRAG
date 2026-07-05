@@ -14,7 +14,8 @@ def build_docs(loaded_docs):
                 "metadata": {
                     "chunk_id": chunk_id,
                     "source": file["source"],
-                    "page": file["page"]
+                    "page": file.get("page", None),
+                    "num_images": file.get("num_images", 0)
                 }
             })
 

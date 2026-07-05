@@ -34,6 +34,7 @@ def prepare_results(results):
 
                 "source": r["source"],
                 "page": r["page"],
+                "num_images": r["num_images"],
 
                 "text": r["text"],
 

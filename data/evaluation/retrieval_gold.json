@@ -48,5 +48,25 @@
   "query": "What do users prefer in AI systems?",
   "source": "future_of_ai_tools.pdf",
   "anchor": "• respond quickly, \n• explain results clearly, \n• maintain predictable behavior, \n• allow correction and iteration."
+},
+{
+  "query": "What is the name displayed on the park entrance gate in the accompanying image?",
+  "source": "diary.pdf",
+  "anchor": "JURASSIC PARK"
+},
+{
+  "query": "What message is written on the greeting card shown in the accompanying image?",
+  "source": "diary.pdf",
+  "anchor": "Happy BIRTHDAY"
+},
+{
+  "query": "What does the sign in the photo or image say?",
+  "source": "walking.docx",
+  "anchor": "EXIT CLOSED"
+},
+{
+  "query": "what words does Peter like?",
+  "source": "walking.docx",
+  "anchor": "I love you"
 }
 ]

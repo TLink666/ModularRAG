@@ -26,6 +26,16 @@ SEMANTIC_MODEL = EMBED_MODEL
 
 RERANK_MODEL="BAAI/bge-reranker-base"
 
+TESSERACT = r"G:/tools/Tesseract-OCR/tesseract.exe"
+
+# ========= Loader =========
+
+ENABLE_OCR = True
+
+OCR_MIN_LENGTH = 20
+
+OCR_MIN_LETTERS = 5
+
 # ========= Chunk =========
 
 CHUNK_METHOD = "semantic"
@@ -52,7 +62,11 @@ RRF_K = 5
 
 RETRIEVAL_THRESHOLD = 0.5
 
-ENABLE_GUARD=True
+# ========= Generation =========
+
+ENABLE_GUARD = True
+
+MAX_CONTEXT_CHARS = 3000
 
 # ========= Experiment =========
 
@@ -60,7 +74,7 @@ DEBUG = False
 
 BUILD_INDEX = True
 
-MAX_CONTEXT_CHARS = 3000
+
 
 def print_config():
     print("\n===== CONFIG =====")

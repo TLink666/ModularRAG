@@ -1,0 +1,29 @@
+{
+  "num_queries": 14,
+  "avg_confidence": 0.529,
+  "min_confidence": 0.0,
+  "max_confidence": 1.0,
+  "unique_sources": 13,
+  "top_chunks": [
+    [
+      59,
+      3
+    ],
+    [
+      13,
+      3
+    ],
+    [
+      20,
+      3
+    ],
+    [
+      19,
+      3
+    ],
+    [
+      22,
+      3
+    ]
+  ]
+}

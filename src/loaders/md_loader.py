@@ -6,7 +6,6 @@ def load_md(path):
             {
                 "source":
                     os.path.basename(path),
-                "page": None,
                 "text": f.read()
             }
         ]
