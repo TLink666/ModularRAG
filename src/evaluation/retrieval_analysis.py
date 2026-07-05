@@ -26,9 +26,15 @@ def analyze_retrieval_errors(results, gold):
             and match_gold(retrieved[0], target)
         ):
             continue
+        
+        if gold_rank is None:
+            error_type = "miss"
+        else:
+            error_type = "low_rank"
 
         errors.append({
             "query": query,
+            "type": error_type,
             "gold": target,
             "gold_rank": gold_rank,
             "retrieved": [

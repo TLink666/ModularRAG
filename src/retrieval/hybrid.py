@@ -1,7 +1,7 @@
 from src.retrieval.bm25_store import *
 from src.retrieval.faiss_retrieve import retrieve
 from src.retrieval.score import calibrate_score
-from src.config import TOP_K, HYBRID_ALPHA, RETRIEVAL_METHOD, RRF_K
+from src.config import FINAL_TOP_K, HYBRID_ALPHA, RETRIEVAL_METHOD, RRF_K
 
 def normalize_scores(results):
     scores = [r["score"] for r in results]
@@ -97,7 +97,7 @@ def finalize_results(results, k):
     return results
 
 
-def hybrid_retrieve(query, model, index, bm25, docs, k=TOP_K, alpha=HYBRID_ALPHA):
+def hybrid_retrieve(query, model, index, bm25, docs, k=FINAL_TOP_K, alpha=HYBRID_ALPHA):
 
     faiss_results, bm25_results = retrieve_candidates(query, model, index, bm25, docs, k)
 

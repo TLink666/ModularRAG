@@ -1,0 +1,14 @@
+{
+  "llm_model": "qwen2.5:7b",
+  "embed_model": "all-MiniLM-L6-v2",
+  "chunk_method": "semantic",
+  "chunk_size": 500,
+  "overlap": 50,
+  "retrieval_method": "rrf",
+  "top_k": 5,
+  "hybrid_alpha": 0.7,
+  "rrf_k": 5,
+  "max_context_chars": 3000,
+  "enable_guard": true,
+  "retrieval_threshold": 0.5
+}

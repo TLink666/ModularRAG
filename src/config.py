@@ -24,6 +24,8 @@ EMBED_MODEL = "all-MiniLM-L6-v2"
 
 SEMANTIC_MODEL = EMBED_MODEL
 
+RERANK_MODEL="..."
+
 # ========= Chunk =========
 
 CHUNK_METHOD = "semantic"
@@ -36,7 +38,11 @@ BREAK_THRESHOLD = 0.75
 
 # ========= Retrieval =========
 
-TOP_K = 5
+RETRIEVE_TOP_K = 20
+
+FINAL_TOP_K = 5
+
+USE_RERANKER = False
 
 HYBRID_ALPHA = 0.7
 
@@ -44,9 +50,9 @@ RETRIEVAL_METHOD = "rrf"
 
 RRF_K = 5
 
-ENABLE_GUARD=True
+RETRIEVAL_THRESHOLD = 0.5
 
-RETRIEVAL_THRESHOLD=0.5
+ENABLE_GUARD=True
 
 # ========= Experiment =========
 
@@ -72,7 +78,7 @@ def print_config():
     )
     print(
         f"TopK:"
-        f" {TOP_K}"
+        f" {FINAL_TOP_K}"
     )
     print(
         f"Hybrid:"
@@ -92,7 +98,7 @@ def export_config():
 
         # Retrieval
         "retrieval_method": RETRIEVAL_METHOD,
-        "top_k": TOP_K,
+        "top_k": FINAL_TOP_K,
         "hybrid_alpha": HYBRID_ALPHA,
         "rrf_k": RRF_K,
 

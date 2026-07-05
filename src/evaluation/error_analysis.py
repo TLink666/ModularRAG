@@ -17,6 +17,9 @@ def print_errors(errors):
         if "anchor" in e["gold"]:
             print(f"Anchor: {e['gold']['anchor']}")
 
+        print("\nFailure Type:")
+        print(e["type"])
+
         print("\nGold Rank:")
         print(e["gold_rank"])
 
