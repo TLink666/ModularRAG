@@ -18,8 +18,8 @@ env/
 .DS_Store
 
 # 输出
-outputs/
-logs/
+results/
+storage/
 
 # 模型
 *.pt
