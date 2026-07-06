@@ -1,6 +1,6 @@
-from src.config import MAX_CONTEXT_CHARS
+import src.config as config
 
-def build_context(retrieved, max_chars=MAX_CONTEXT_CHARS):
+def build_context(retrieved, max_chars=config.MAX_CONTEXT_CHARS):
     context = []
     seen = set()
     total = 0

@@ -5,3 +5,5 @@ jupyter
 pypdf
 rank-bm25
 python-docx
+streamlit
+tesseract-ocr

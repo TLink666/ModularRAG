@@ -1,14 +1,12 @@
 from pypdf import PdfReader
-from src.config import ENABLE_OCR, OCR_MIN_LENGTH, OCR_MIN_LETTERS, TESSERACT
+import src.config as config
 import os
 import fitz  # pymupdf
 import pytesseract
 from PIL import Image
 import io
 
-pytesseract.pytesseract.tesseract_cmd = TESSERACT
-
-MIN_OCR_LENGTH = 20
+pytesseract.pytesseract.tesseract_cmd = config.TESSERACT
 
 def image_to_text(image_bytes):
     image = Image.open(io.BytesIO(image_bytes))
@@ -42,10 +40,10 @@ def valid_ocr(text):
 
     words = len(text.split())
 
-    if letters < OCR_MIN_LETTERS:
+    if letters < config.OCR_MIN_LETTERS:
         return False
 
-    if len(text) < OCR_MIN_LENGTH and words < 2:
+    if len(text) < config.OCR_MIN_LENGTH and words < 2:
         return False
 
     return True

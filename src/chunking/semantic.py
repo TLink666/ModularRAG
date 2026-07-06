@@ -2,13 +2,13 @@ import numpy as np
 from src.models.model_loader import load_model
 from src.chunking.paragraph import split_paragraphs
 from src.chunking.recursive import split_sentences
-from src.config import SEMANTIC_BREAK_THRESHOLD, SEMANTIC_MODEL
+import src.config as config
 
 def cosine(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 
-def semantic_chunk(text, chunk_size=500, overlap=0, break_threshold=SEMANTIC_BREAK_THRESHOLD):
+def semantic_chunk(text, chunk_size=500, overlap=0, break_threshold=config.SEMANTIC_BREAK_THRESHOLD):
     paragraphs = split_paragraphs(text)
 
     sentences = []
@@ -18,7 +18,7 @@ def semantic_chunk(text, chunk_size=500, overlap=0, break_threshold=SEMANTIC_BRE
     if not sentences:
         return []
 
-    model = load_model(SEMANTIC_MODEL)
+    model = load_model(config.SEMANTIC_MODEL)
     embeddings = model.encode(sentences)
 
     chunks = []

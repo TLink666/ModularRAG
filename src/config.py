@@ -28,6 +28,10 @@ RERANK_MODEL="BAAI/bge-reranker-base"
 
 TESSERACT = r"G:/tools/Tesseract-OCR/tesseract.exe"
 
+HF_ENDPOINT = "https://hf-mirror.com"
+
+HF_OFFLINE = True
+
 # ========= Loader =========
 
 ENABLE_OCR = True

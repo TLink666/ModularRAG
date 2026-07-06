@@ -3,8 +3,7 @@ import os
 import zipfile
 
 from docx import Document
-
-from src.config import ENABLE_OCR
+import src.config as config
 from src.loaders.image_ocr import image_to_text, valid_ocr
 
 
@@ -20,7 +19,7 @@ def load_docx(path):
 
     image_blocks = []
 
-    if ENABLE_OCR:
+    if config.ENABLE_OCR:
 
         with zipfile.ZipFile(path) as z:
 
@@ -30,16 +29,16 @@ def load_docx(path):
 
                 if not name.startswith("word/media/"):
                     continue
-                print("Found:", name)
                 image_bytes = z.read(name)
                 image_bytes = z.read(name)
 
                 ocr_text = image_to_text(image_bytes)
-                print("OCR:", repr(ocr_text))
-                print("Valid:", valid_ocr(ocr_text))
 
                 if not valid_ocr(ocr_text):
+                    if config.DEBUG:
+                        print(f"[OCR] Skip: {repr(ocr_text)}")
                     continue
+                    
 
                 image_blocks.append(
                     f"\n[IMAGE_{image_id}]\n"

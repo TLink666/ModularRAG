@@ -1,6 +1,6 @@
 import os
 import json
-from src.config import RESULT_DIR
+import src.config as config
 from datetime import datetime
 from src.output.citation import resolve_citations
 
@@ -64,13 +64,13 @@ def prepare_results(results):
     
 
 def save_experiment(
-    config,
+    configuration,
     results,
     metrics,
     debug_stats,
 ):
     save_dir = os.path.join(
-        RESULT_DIR,
+        config.RESULT_DIR,
         datetime.now().strftime("%Y%m%d_%H%M%S")
     )
     
@@ -78,7 +78,7 @@ def save_experiment(
 
     os.makedirs(save_dir,exist_ok=True)
     
-    save_json(config, os.path.join(save_dir, "config.json"))
+    save_json(configuration, os.path.join(save_dir, "config.json"))
 
     save_json(experiment_results, os.path.join(save_dir, "results.json"))
 

@@ -1,8 +1,5 @@
-from src.config import *
-import os
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
-os.environ["HF_HOME"] = HF_CACHE
 from sentence_transformers import SentenceTransformer, CrossEncoder
+import src.config as config
 
 _models = {}
 

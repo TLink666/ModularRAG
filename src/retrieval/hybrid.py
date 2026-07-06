@@ -2,7 +2,7 @@ from src.retrieval.bm25_store import *
 from src.retrieval.faiss_retrieve import retrieve
 from src.retrieval.score import calibrate_score
 from src.models.reranker import rerank
-from src.config import FINAL_TOP_K, RETRIEVE_TOP_K, HYBRID_ALPHA, RETRIEVAL_METHOD, RRF_K, USE_RERANKER
+import src.config as config
 
 def normalize_scores(results):
     scores = [r["score"] for r in results]
@@ -18,9 +18,9 @@ def normalize_scores(results):
 
 def retrieve_candidates(query, model, index, bm25, docs):
 
-    faiss_results = retrieve(query, model, index, docs, RETRIEVE_TOP_K)
+    faiss_results = retrieve(query, model, index, docs, config.RETRIEVE_TOP_K)
 
-    bm25_results = search_bm25(bm25, docs, query, RETRIEVE_TOP_K)
+    bm25_results = search_bm25(bm25, docs, query, config.RETRIEVE_TOP_K)
 
     return faiss_results, bm25_results
 
@@ -72,15 +72,15 @@ def compute_fusion_scores(merged, alpha):
 
     for cid in merged:
 
-        if RETRIEVAL_METHOD == "weighted":
+        if config.RETRIEVAL_METHOD == "weighted":
             merged[cid]["score"] = (alpha * merged[cid]["faiss_score"] + (1-alpha) * merged[cid]["bm25_score"])
 
-        elif RETRIEVAL_METHOD == "rrf":
+        elif config.RETRIEVAL_METHOD == "rrf":
             score = 0
             if (merged[cid]["faiss_rank"]is not None):
-                score += (1 /(RRF_K+merged[cid]["faiss_rank"]))
+                score += (1 /(config.RRF_K+merged[cid]["faiss_rank"]))
             if (merged[cid]["bm25_rank"]is not None):
-                score += (1 /(RRF_K+merged[cid]["bm25_rank"]))
+                score += (1 /(config.RRF_K+merged[cid]["bm25_rank"]))
             merged[cid]["score"]=score
 
     return merged
@@ -105,14 +105,14 @@ def finalize_results(results, query):
         reverse=True
     )
 
-    results = results[:RETRIEVE_TOP_K]
+    results = results[:config.RETRIEVE_TOP_K]
 
     results = calibrate_score(results)
 
-    if USE_RERANKER:
+    if config.USE_RERANKER:
         results = rerank(query, results)
 
-    results = results[:FINAL_TOP_K]
+    results = results[:config.FINAL_TOP_K]
 
     for rank, result in enumerate(results, 1):
         result["rank"] = rank
@@ -120,7 +120,7 @@ def finalize_results(results, query):
     return results
 
 
-def hybrid_retrieve(query, model, index, bm25, docs, alpha=HYBRID_ALPHA):
+def hybrid_retrieve(query, model, index, bm25, docs, alpha=config.HYBRID_ALPHA):
 
     faiss_results, bm25_results = retrieve_candidates(query, model, index, bm25, docs)
 

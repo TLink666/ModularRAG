@@ -2,7 +2,7 @@ import os
 import fitz
 from pypdf import PdfReader
 
-from src.config import ENABLE_OCR
+import src.config as config
 from src.loaders.image_ocr import image_to_text, valid_ocr
 
 
@@ -20,6 +20,8 @@ def extract_pdf_images_ocr(pdf, page_idx, source, page_num):
         ocr_text = image_to_text(image_bytes)
 
         if not valid_ocr(ocr_text):
+            if config.DEBUG:
+                print(f"[OCR] Skip: {repr(ocr_text)}")
             continue
 
         image_blocks.append(
@@ -47,7 +49,7 @@ def load_pdf(path):
 
         image_blocks = []
 
-        if ENABLE_OCR:
+        if config.ENABLE_OCR:
             image_blocks = extract_pdf_images_ocr(
                 pdf,
                 page_idx,

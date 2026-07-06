@@ -6,37 +6,70 @@ from src.evaluation.gold_loader import load_gold
 from src.evaluation.compute_metrics import compute_metrics
 from src.evaluation.retrieval_analysis import analyze_retrieval_errors
 from src.experiment.save_experiment import save_experiment
-from src.config import *
+import src.config as config
 
-def run_rag(queries):
-
+def build_pipeline():
     model, docs, index, bm25 = prepare_pipeline()
 
-    results = batch_query(
-            queries,
-            model,
-            index,
-            bm25,
-            docs
-        )
+    return {
+        "model": model,
+        "docs": docs,
+        "index": index,
+        "bm25": bm25
+    }
+    
+def run_query(query, pipeline):
 
-    gold = load_gold(
-        f"{EVA_DATA_DIR}/retrieval_gold.json"
+    results = batch_query(
+        [query],
+        pipeline["model"],
+        pipeline["index"],
+        pipeline["bm25"],
+        pipeline["docs"]
     )
+
+    return results[0]
+
+def run_queries(queries, pipeline):
+
+    return batch_query(
+        queries,
+        pipeline["model"],
+        pipeline["index"],
+        pipeline["bm25"],
+        pipeline["docs"]
+    )
+    
+def evaluate(results, docs):
+
+    gold = load_gold(f"{config.EVA_DATA_DIR}/retrieval_gold.json")
 
     chunk_stats = analyze_chunks(docs)
 
     debug_stats = retrieval_debug_stats(results)
-    
+
     errors = analyze_retrieval_errors(results, gold)
 
     metrics = compute_metrics(results, gold, chunk_stats, errors)
-    
+
+    return metrics, chunk_stats, debug_stats, errors
+
+def run_rag(queries):
+
+    pipeline = build_pipeline()
+
+    results = run_queries(queries, pipeline)
+
+    metrics, chunk_stats, debug_stats, errors = evaluate(
+        results,
+        pipeline["docs"]
+    )
+
     save_experiment(
-        config=export_config(),
+        configuration=config.export_config(),
         results=results,
         metrics=metrics,
         debug_stats=debug_stats
     )
 
-    return results, metrics, docs, chunk_stats, debug_stats, errors
+    return results, metrics, pipeline["docs"], chunk_stats, debug_stats, errors

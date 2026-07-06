@@ -1,6 +1,6 @@
-from src.config import *
+import src.config as config
 
-def retrieval_guard(retrieved, threshold=RETRIEVAL_THRESHOLD):
+def retrieval_guard(retrieved, threshold=config.RETRIEVAL_THRESHOLD):
 
     if (len(retrieved) == 0):
         return False

@@ -1,7 +1,4 @@
-from src.config import RERANK_MODEL, HF_CACHE
-import os
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
-os.environ["HF_HOME"] = HF_CACHE
+import src.config as config
 from src.models.model_loader import load_model
 from sentence_transformers import CrossEncoder
 
@@ -11,7 +8,7 @@ def rerank(query, results):
         return results
 
     model = load_model(
-        RERANK_MODEL,
+        config.RERANK_MODEL,
         CrossEncoder
     )
 
