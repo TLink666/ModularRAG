@@ -17,9 +17,12 @@ env/
 # Mac
 .DS_Store
 
+# 数据
+data/*
+
 # 输出
-results/
-storage/
+results/*
+storage/*
 
 # 模型
 *.pt
