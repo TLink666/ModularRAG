@@ -1,9 +1,18 @@
+# Core
 sentence-transformers
 faiss-cpu
 numpy
-jupyter
-pypdf
 rank-bm25
+
+# Document Processing
+pypdf
+PyMuPDF
 python-docx
+Pillow
+pytesseract
+
+# UI
 streamlit
-tesseract-ocr
+
+# Development
+jupyter
