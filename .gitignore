@@ -18,6 +18,7 @@ env/
 .DS_Store
 
 # 数据
+data/*
 
 # 输出
 results/*
