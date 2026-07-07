@@ -26,7 +26,6 @@ Citation-aware Answer Generation
 ModularRAG
 ├── data/
 ├── notebooks/
-├── results/
 ├── src/
 │   ├── chunking/
 │   ├── evaluation/
@@ -39,8 +38,11 @@ ModularRAG
 │   ├── vector_store/
 │   ├── config.py
 │   └── env.py
-├── storage/
 ├── app.py
 ├── run.py
 ├── requirements.txt
 └── README.md
+
+## Demo
+
+![ModularRAG Demo](assets/demo.png)
