@@ -42,6 +42,7 @@ ModularRAG
 ├── run.py
 ├── requirements.txt
 └── README.md
+```
 
 ## Demo
 
