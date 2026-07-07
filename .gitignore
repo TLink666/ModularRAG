@@ -20,6 +20,8 @@ env/
 # 数据
 data/*
 !data/sample.docx
+!data/evaluation/
+data/evaluation/*
 !data/evaluation/retrieval_gold.json
 
 # 输出
